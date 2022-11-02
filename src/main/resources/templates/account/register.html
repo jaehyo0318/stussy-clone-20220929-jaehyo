@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/head :: head}"></head>
+<head>
+    <link rel="stylesheet" href="/static/css/account.css">
+    <title>Create Account</title>
+</head>
+<body>
+    <div id="container">
+        <header th:replace="~{fragment/header :: header}"></header>
+        <main>
+            <div class="login">
+                <h1 class="login-title">ACCOUNT</h1>
+                <div class="login-container">
+                    <section class="login-current">
+                        <h2 class="login-subheader">신규 회원가입</h2>
+                        <div class="account-errors errors-invisible">
+                            <ul>
+                                
+                            </ul>
+                        </div>
+                        <div class="login-name">
+                            <div class="login-half">
+                                <input type="text" class="login-input" placeholder="이름">
+                            </div>
+                            <div class="login-half">
+                                <input type="text" class="login-input" placeholder="성">
+                            </div>
+                        </div>
+                        <input type="email" class="login-input"  placeholder="이메일">
+                        <input type="password" class="login-input"  placeholder="비밀번호">
+                        <button type="button" class="black-button login-button">확인</button>
+                        <a href="/account/login" class="login-return">로그인으로 돌아가기</a>
+                </section>
+                </div>
+            </div>
+        </main>
+        <footer>
+        </footer>
+    </div>
+    <script src="/static/js/register.js"></script>
+</body>
+</html>

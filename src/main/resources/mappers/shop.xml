@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stussy.stussyclone20220929jaehyo.repository.ShopRepository">
+
+    <resultMap id="product_img_file" type="com.stussy.stussyclone20220929jaehyo.domain.ProductImgFile">
+        <result property="id" column="file_id"></result>
+        <result property="origin_name" column="origin_name"></result>
+        <result property="temp_name" column="temp_name"></result>
+    </resultMap>
+
+    <resultMap id="product_detail" type="com.stussy.stussyclone20220929jaehyo.domain.ProductDetail">
+        <result property="group_id" column="group_id"></result>
+        <result property="name" column="name"></result>
+        <result property="price" column="price"></result>
+        <result property="color" column="color"></result>
+        <result property="size" column="size"></result>
+        <result property="info_simple" column="info_simple"></result>
+        <result property="info_detail" column="info_detail"></result>
+        <result property="info_option" column="info_option"></result>
+        <result property="info_management" column="info_management"></result>
+        <result property="info_shipping" column="info_shipping"></result>
+
+        <collection property="productImgFiles" javaType="list" resultMap="product_img_file"></collection>
+    </resultMap>
+
+    <select id="getCollectionList"
+            parameterType="hashmap"
+            resultType="com.stussy.stussyclone20220929jaehyo.domain.CollectionProduct">
+        SELECT
+            pm.id,
+            pm.category,
+            pm.group_id,
+            pm.NAME,
+            pm.price,
+            pig.temp_name,
+            pc.total_count
+        FROM
+            product_mst pm
+            LEFT OUTER JOIN product_img pig ON(pig.product_id = pm.id)
+            LEFT OUTER JOIN (select
+                                COUNT(*) AS total_count
+                            from
+                                (select
+                                    *
+                                from
+                                    product_mst pm
+                                where
+                                    1 = 1
+                                    <if test='category != "all"'>
+                                        and category = #{category}
+                                    </if>
+                            GROUP by
+                                group_id) cnt) pc ON(1 = 1)
+        where
+            1 = 1
+            <if test='category != "all"'>
+                and pm.category = #{category}
+            </if>
+        GROUP BY
+            pm.group_id
+        LIMIT #{page}, 16
+    </select>
+    <select id="getProductList" parameterType="Integer" resultMap="product_detail">
+        SELECT
+            pm.group_id,
+            pm.name,
+            pm.price,
+            pm.color,
+            pm.size,
+            pm.info_simple,
+            pm.info_detail,
+            pm.info_option,
+            pm.info_management,
+            pm.info_shipping,
+            pim.id as file_id,
+            pim.origin_name,
+            pim.temp_name
+        FROM
+            product_mst pm
+            LEFT OUTER JOIN product_img pim ON(pim.product_id = (select
+                                                                    id
+                                                                from
+                                                                    product_mst
+                                                                where
+                                                                    group_id = #{groupId}
+                                                                LIMIT 1))
+        WHERE
+            group_id = #{groupId}
+    </select>
+</mapper>

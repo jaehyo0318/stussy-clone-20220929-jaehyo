@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/head :: head}"></head>
+<head>
+    <link rel="stylesheet" href="/static/css/aside.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <title>Admin</title>
+</head>
+<body>
+    <div id="container">
+        <header th:replace="~{fragment/header :: header}"></header>
+        <main>
+            <div class="admin">
+                <h1 class="admin-title">ADMIN PRODUCT LIST</h1>
+                <div class="admin-container">
+                    <aside th:replace="~{admin/fragment/aside :: aside}"></aside>
+                    <section class="admin-main">
+                        <div class="list-header">
+                            <div class="category-select">
+                                <select class="product-input">
+                                    <option value="ALL" selected>전체 상품</option>
+                                    <option value="DENIM">DENIM</option>
+                                    <option value="TEES">TEES</option>
+                                    <option value="SWEATS">SWEATS</option>
+                                    <option value="OVERDYED">OVERDYED</option>
+                                    <option value="PANTS">PANTS</option>
+                                    <option value="SHORTS">SHORTS</option>
+                                    <option value="OUTERWEAR">OUTERWEAR</option>
+                                    <option value="KNITS">KNITS</option>
+                                    <option value="TOPS & SHIRTS">TOPS & SHIRTS</option>
+                                    <option value="HEADWEAR">HEADWEAR</option>
+                                    <option value="ACCESSORIES">ACCESSORIES</option>
+                                </select>
+                            </div>
+                            <div class="product-search">
+                                <input type="text" class="product-input" placeholder="상품명">
+                                <button type="button" class="search-button black-button">검색</button>
+                            </div>
+                        </div>
+                        <div>
+                            <ul class="page-buttons">
+                                
+                            </ul>
+                        </div>
+                        <table class="product-list">
+                            <thead>
+                                <tr>
+                                    <th>상품번호</th>
+                                    <th>상품종류</th>
+                                    <th>상품명</th>
+                                    <th>가격</th>
+                                    <th>색상</th>
+                                    <th>사이즈</th>
+                                    <th>상세</th>
+                                    <th>삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list-body">
+                                
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <footer>
+        </footer>
+    </div>
+    <script src="/static/js/product_list.js"></script>
+</body>
+</html>

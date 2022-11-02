@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/head :: head}"></head>
+<head>
+    <link rel="stylesheet" href="/static/css/account.css">
+    <title>Account</title>
+</head>
+<body>
+    <div id="container">
+        <header th:replace="~{fragment/header :: header}"></header>
+        <main>
+            <div class="login">
+                <h1 class="login-title">ACCOUNT</h1>
+                <div class="login-container">
+                    <section class="login-new">
+                        <h2 class="login-subheader">회원가입</h2>
+                        <p class="login-content">회원가입을 하시면, 주문 조회와 개인정보 관리 및 빠른 체크아웃 등 다양한 혜택을 누리실 수 있습니다.</p>
+                        <button type="button" class="black-button login-button">신규가입</button>
+                    </section>
+                    <section class="login-current">
+                        <form action="/account/login" method="post">
+                            <h2 class="login-subheader">로그인</h2>
+                            <div class="account-errors">
+                                <ul>
+                                    <li th:text="${error}"></li>
+                                </ul>
+                            </div>
+                            <input type="email" class="login-input" name="email" placeholder="이메일" required>
+                            <input type="password" class="login-input" name="password" placeholder="비밀번호" required>
+                            <a href="" class="login-show-recover">비밀번호를 잊으셨나요?</a>
+                            <button type="submit" class="black-button login-button">로그인</button>
+                            <button type="button" class="black-button login-button" onclick="location.href = '/oauth2/authorization/google'">구글 로그인</button>
+                            <button type="button" class="black-button login-button" onclick="location.href = '/oauth2/authorization/naver'">네이버 로그인</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <footer>
+        </footer>
+    </div>
+    <script src="/static/js/login.js"></script>
+</body>
+</html>
